@@ -1,0 +1,320 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    background-color: #f0f2f5;
+    color: #333;
+}
+
+header {
+    background-color: #003366;
+    color: white;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+}
+
+.auth-section {
+    display: flex;
+    align-items: center;
+}
+
+.auth-btn {
+    color: white;
+    text-decoration: none;
+    background-color: #00509e;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    font-size: 1rem;
+    margin-left: 0.5rem;
+}
+
+.auth-btn:hover {
+    background-color: #007acc;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    }
+
+nav a:hover {
+    background-color: #00509e;
+}
+
+/* Notification badge for My Bookings */
+#bookings-badge {
+    position: absolute;
+    top: -6px;
+    right: -10px;
+    background: #dc3545;
+    color: #fff;
+    font-size: 0.75rem;
+    padding: 2px 6px;
+    border-radius: 999px;
+    font-weight: 700;
+}
+
+main {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 1rem;
+}
+
+section {
+    background-color: white;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+h2 {
+    margin-top: 0;
+    color: #003366;
+    border-bottom: 2px solid #00509e;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+@media (min-width: 768px) {
+    form {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+}
+
+input, button {
+    padding: 0.8rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+button {
+    background-color: #00509e;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #003366;
+}
+
+#flight-results .flight, #available-flights .flight, #my-bookings > div, #all-bookings > div, #all-flights > div {
+    border: 1px solid #eee;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    transition: box-shadow 0.3s;
+}
+
+#flight-results .flight:hover, #available-flights .flight:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Grid layout for cards */
+#available-flights, #flight-results {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+}
+
+.flight.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 220px;
+}
+
+.flight .route {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #003366;
+    margin-bottom: 0.3rem;
+}
+
+.flight .meta {
+    color: #555;
+    font-size: 0.95rem;
+    line-height: 1.3rem;
+    margin-bottom: 0.8rem;
+}
+
+.price-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: #00509e;
+    color: #fff;
+    padding: 0.3rem 0.6rem;
+    border-radius: 999px;
+    font-weight: 700;
+}
+
+.card-actions {
+    margin-top: auto;
+}
+
+.card-actions .book-btn {
+    width: 100%;
+}
+
+.book-btn {
+    background-color: #28a745;
+}
+
+.book-btn:hover {
+    background-color: #218838;
+}
+
+.issue-btn {
+    background-color: #ffc107;
+    color: #333;
+}
+
+.issue-btn:hover {
+    background-color: #e0a800;
+}
+
+#notification-section {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #333;
+    color: white;
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+#modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+#confirmation-modal {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: center;
+}
+
+#spinner-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255,255,255,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1001;
+}
+
+.spinner {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #00509e;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#seat-map-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.seat-row {
+    display: flex;
+    margin-bottom: 0.5rem;
+}
+
+.seat {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 0.2rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+}
+
+.seat.available {
+    background-color: #a5d6a7;
+}
+
+.seat.available:hover {
+    background-color: #81c784;
+}
+
+.seat.selected {
+    background-color: #64b5f6;
+}
+
+.seat.booked {
+    background-color: #ef9a9a;
+    cursor: not-allowed;
+}
+
+.aisle {
+    width: 30px;
+    height: 30px;
+    margin: 0.2rem;
+}

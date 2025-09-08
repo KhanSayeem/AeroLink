@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AeroLink - Airline Ticket Booking System</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1>AeroLink</h1>
+            <div class="auth-section">
+                <span id="user-display" style="display: none; color: white; margin-right: 1rem;"></span>
+                <a href="#" id="login-nav" class="auth-btn">Login</a>
+                <a href="#" id="logout-btn" class="auth-btn" style="display: none;">Logout</a>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#" id="search-nav">Flight Search</a></li>
+                <li><a href="#" id="register-nav">Register</a></li>
+                <li><a href="#" id="bookings-nav" style="display: none; position: relative;">My Bookings <span id="bookings-badge" style="display:none;">0</span></a></li>
+                <li><a href="#" id="profile-nav" style="display: none;">My Profile</a></li>
+                <li><a href="#" id="staff-nav" style="display: none;">Ticket Management</a></li>
+                <li><a href="#" id="admin-nav" style="display: none;">Flight Management</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="flight-search-section">
+            <h2>Flight Search</h2>
+            <form id="flight-search-form">
+                <input type="text" id="origin" placeholder="Origin" required>
+                <input type="text" id="destination" placeholder="Destination" required>
+                <input type="date" id="departure-date" required>
+                <select id="flight-class">
+                    <option value="economy">Economy</option>
+                    <option value="business">Business</option>
+                    <option value="first">First Class</option>
+                </select>
+                <button type="submit">Search Flights</button>
+            </form>
+
+            <h2 style="margin-top:2rem;">Available Flights</h2>
+            <div id="available-flights"></div>
+        </section>
+
+        <section id="flight-results-section" style="display: none;">
+            <h2>Flight Results</h2>
+            <div id="flight-results"></div>
+        </section>
+
+        <section id="booking-section" style="display: none;">
+            <h2>Book Flight</h2>
+            <form id="booking-form">
+                <input type="text" id="passenger-name" placeholder="Passenger Name" required>
+                <input type="email" id="passenger-email" placeholder="Passenger Email" required>
+                <select id="seat-selection">
+                    <option value="A1">A1</option>
+                    <option value="A2">A2</option>
+                    <option value="B1">B1</option>
+                    <option value="B2">B2</option>
+                </select>
+                <button type="submit">Confirm Booking</button>
+            </form>
+        </section>
+
+        <section id="seat-map-section" style="display: none;">
+            <h2>Select Your Seat</h2>
+            <div id="seat-map-container"></div>
+            <button id="confirm-seat-btn">Confirm Seat</button>
+        </section>
+
+        <section id="payment-section" style="display: none;">
+            <h2>Payment</h2>
+            <form id="payment-form">
+                <input type="text" id="card-number" placeholder="Card Number" required>
+                <input type="text" id="card-expiry" placeholder="MM/YY" required>
+                <input type="text" id="card-cvc" placeholder="CVC" required>
+                <button type="submit">Pay Now</button>
+            </form>
+        </section>
+
+        <section id="login-section" style="display: none;">
+            <h2>Login</h2>
+            <form id="login-form">
+                <input type="text" id="login-username" placeholder="Username" required>
+                <input type="password" id="login-password" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+        </section>
+
+        <section id="register-section" style="display: none;">
+            <h2>Register</h2>
+            <form id="register-form">
+                <input type="text" id="register-username" placeholder="Username" required>
+                <input type="password" id="register-password" placeholder="Password" required>
+                <button type="submit">Register</button>
+            </form>
+        </section>
+
+        <section id="profile-section" style="display: none;">
+            <h2>My Profile</h2>
+            <div id="profile-info"></div>
+            <h3>My Bookings</h3>
+            <div id="my-bookings"></div>
+            <h3>Notifications</h3>
+            <div id="notifications-list"></div>
+            <h3>Saved Preferences</h3>
+            <form id="saved-preferences-form">
+                <select id="preferred-class">
+                    <option value="economy">Economy</option>
+                    <option value="business">Business</option>
+                    <option value="first">First Class</option>
+                </select>
+                <button type="submit">Save Preferences</button>
+            </form>
+            <button id="profile-logout-btn" style="margin-top: 1rem;">Logout</button>
+        </section>
+
+        <section id="staff-section" style="display: none;">
+            <h2>Ticket Management</h2>
+            <div id="all-bookings"></div>
+        </section>
+
+        <section id="admin-section" style="display: none;">
+            <h2>Flight Schedule Management</h2>
+            <form id="add-flight-form">
+                <input type="text" id="add-flight-number" placeholder="Flight Number" required>
+                <input type="text" id="add-flight-origin" placeholder="Origin" required>
+                <input type="text" id="add-flight-destination" placeholder="Destination" required>
+                <input type="date" id="add-flight-date" required>
+                <input type="time" id="add-flight-time" required>
+                <input type="number" id="add-flight-price" placeholder="Price" required>
+                <input type="number" id="add-flight-seats" placeholder="Seats" required>
+                <select id="add-flight-aircraft" required>
+                    <!-- Aircraft options will be populated dynamically -->
+                </select>
+                <button type="submit">Add Flight</button>
+            </form>
+            <div id="all-flights"></div>
+        </section>
+
+        <section id="notification-section" style="display: none;">
+            <p id="notification-message"></p>
+        </section>
+    </main>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+    <script src="payment.js"></script>
+
+    <div id="modal-overlay" style="display: none;">
+        <div id="confirmation-modal">
+            <p id="modal-message"></p>
+            <button id="confirm-btn">Confirm</button>
+            <button id="cancel-btn">Cancel</button>
+        </div>
+    </div>
+
+    <div id="spinner-overlay" style="display: none;">
+        <div class="spinner"></div>
+    </div>
+</body>
+</html>

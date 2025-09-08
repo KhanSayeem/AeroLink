@@ -1,0 +1,171 @@
+
+document.addEventListener('DOMContentLoaded', () => {
+    const sections = {
+        search: document.getElementById('flight-search-section'),
+        results: document.getElementById('flight-results-section'),
+        booking: document.getElementById('booking-section'),
+        login: document.getElementById('login-section'),
+        register: document.getElementById('register-section'),
+        profile: document.getElementById('profile-section'),
+        staff: document.getElementById('staff-section'),
+        admin: document.getElementById('admin-section'),
+        notification: document.getElementById('notification-section'),
+    };
+
+    const navLinks = {
+        search: document.getElementById('search-nav'),
+        login: document.getElementById('login-nav'),
+        register: document.getElementById('register-nav'),
+        profile: document.getElementById('profile-nav'),
+        staff: document.getElementById('staff-nav'),
+        admin: document.getElementById('admin-nav'),
+    };
+
+    const flightSearchForm = document.getElementById('flight-search-form');
+    const flightResultsContainer = document.getElementById('flight-results');
+    const bookingForm = document.getElementById('booking-form');
+    const loginForm = document.getElementById('login-form');
+    const registerForm = document.getElementById('register-form');
+    const profileInfoContainer = document.getElementById('profile-info');
+    const myBookingsContainer = document.getElementById('my-bookings');
+    const allBookingsContainer = document.getElementById('all-bookings');
+    const allFlightsContainer = document.getElementById('all-flights');
+    const addFlightForm = document.getElementById('add-flight-form');
+    const savedPreferencesForm = document.getElementById('saved-preferences-form');
+    const notificationMessage = document.getElementById('notification-message');
+    const modalOverlay = document.getElementById('modal-overlay');
+    const confirmationModal = document.getElementById('confirmation-modal');
+    const modalMessage = document.getElementById('modal-message');
+    const confirmBtn = document.getElementById('confirm-btn');
+    const cancelBtn = document.getElementById('cancel-btn');
+    const spinnerOverlay = document.getElementById('spinner-overlay');
+
+    let currentUser = null;
+    let userDatabase = JSON.parse(localStorage.getItem('users')) || users;
+    let currentFlight = null;
+    let currentBooking = null;
+
+    function showSection(sectionName) {
+        Object.values(sections).forEach(section => {
+            section.style.display = 'none';
+        });
+        sections[sectionName].style.display = 'block';
+    }
+
+    function showNotification(message, isError = false) {
+        notificationMessage.textContent = message;
+        notificationMessage.parentElement.style.backgroundColor = isError ? '#dc3545' : '#333';
+        sections.notification.style.display = 'block';
+        setTimeout(() => {
+            sections.notification.style.display = 'none';
+        }, 3000);
+    }
+
+    function showSpinner() {
+        spinnerOverlay.style.display = 'flex';
+    }
+
+    function hideSpinner() {
+        spinnerOverlay.style.display = 'none';
+    }
+
+    function showModal(message, onConfirm) {
+        modalMessage.textContent = message;
+        modalOverlay.style.display = 'flex';
+
+        confirmBtn.onclick = () => {
+            hideModal();
+            onConfirm();
+        };
+
+        cancelBtn.onclick = () => {
+            hideModal();
+        };
+    }
+
+    function hideModal() {
+        modalOverlay.style.display = 'none';
+    }
+
+    function updateNav() {
+        if (currentUser) {
+            navLinks.login.style.display = 'none';
+            navLinks.register.style.display = 'none';
+            navLinks.profile.style.display = 'block';
+            if (currentUser.role === 'staff') {
+                navLinks.staff.style.display = 'block';
+            }
+            if (currentUser.role === 'admin') {
+                navLinks.admin.style.display = 'block';
+            }
+        } else {
+            navLinks.login.style.disp     navLinks.login.style.display = 'block';
+            navLinks.register.style.display = 'block';
+            navLinks.profile.style.display = 'none';
+            navLinks.staff.style.display = 'none';
+            navLinks.admin.style.display = 'none';
+        }
+    }
+
+    navLinks.search.addEventListener('click', () => showSection('search'));
+    navLinks.login.addEventListener('click', () => showSection('login'));
+    navLinks.register.addEventListener('click', () => showSection('register'));
+    navLinks.profile.addEventListener('click', () => {
+        displayProfile();
+        showSection('profile');
+    });
+    navLinks.staff.addEventListener('click', () => {
+        displayAllBookings();
+        showSection('staff');
+    });
+    navLinks.admin.addEventListener('click', () => {
+        displayAllFlights();
+        showSection('admin');
+    });
+
+    flightSearchForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const origin = document.getElementById('origin').value.trim();
+        const destination = document.getElementById('destination').value.trim();
+        const date = document.getElementById('departure-date').value;
+        const flightClass = document.getElementById('flight-class').value;
+
+        if (origin.toLowerCase() === destination.toLowerCase()) {
+            showNotification('Origin and destination cannot be the same.', true);
+            return;
+        }
+
+        showSpinner();
+        setTimeout(() => {
+            const results = flights.filter(flight => 
+                flight.origin.toLowerCase() === origin.toLowerCase() &&
+                flight.destination.toLowerCase() === destination.toLowerCase() &&
+                flight.date === date &&
+                flight.classes.includes(flightClass)
+            );
+            displayFlightResults(results);
+            showSection('results');
+            hideSpinner();
+        }, 500);
+    });
+
+    function displayFlightResults(results) {
+        flightResultsContainer.innerHTML = '';
+        if (results.length === 0) {
+            flightResultsContainer.innerHTML = '<p>No flights found.</p>';
+            return;
+        }
+
+        results.forEach(flight => {
+            const flightDiv = document.createElement('div');
+            flightDiv.className = 'flight';
+            flightDiv.innerHTML = `
+                <p><strong>Flight:</strong> ${flight.flightNumber}</p>
+                <p><strong>From:</strong> ${flight.origin} <strong>To:</strong> ${flight.destination}</p>
+                <p><strong>Date:</strong> ${flight.date} <strong>Time:</strong> ${flight.time}</p>
+                <p><strong>Price:</strong> ${flight.price}</p>
+                <p><strong>Seats Available:</strong> ${flight.seatsAvailable}</p>
+                <p><strong>Aircraft:</strong> ${flight.aircraft}</p>
+                <button class=
+ss=
+
