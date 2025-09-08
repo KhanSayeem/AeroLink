@@ -35,7 +35,9 @@ AeroLink is a dynamic web-based Airline Ticket Booking System built using HTML, 
    git clone https://github.com/your-username/aerolink.git
    cd aerolink
    ```
+   
 2. **Open the `index.html` file in your terminal**
    ```bash
    start index.html
    ```
+   **or you can also double click the `index.html` file in you project folder**
